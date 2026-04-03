@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreeUnit — Community LTS fork of Unit</title>
+  <meta name="description" content="Unit application server, continued by the community. Free as in freedom.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #1e1e1e;
+      --text: #e8e8e8;
+      --muted: #555;
+      --accent: #00c896;
+      --accent-dim: #00c89620;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-family: var(--mono);
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--text); }
+
+    nav .links { display: flex; gap: 2rem; align-items: center; }
+
+    .btn {
+      background: var(--accent);
+      color: #000;
+      padding: 0.4rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      display: inline-block;
+    }
+
+    .btn:hover { opacity: 0.85; color: #000; }
+
+    /* HERO */
+    .hero {
+      padding: 8rem 0 6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tag::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--mono);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-quote {
+      border-left: 2px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 2.5rem 0;
+      background: var(--accent-dim);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--text);
+      max-width: 580px;
+    }
+
+    .hero-quote strong {
+      color: var(--accent);
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.4rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* LINEAGE */
+    .lineage {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .lineage-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .lineage-items {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .lineage-item {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text);
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h2 {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    h2::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* GOALS */
+    .goals {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .goal {
+      background: var(--bg);
+      padding: 1.75rem;
+    }
+
+    .goal-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .goal-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .goal-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* INSTALL */
+    .code-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--text);
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .code-block .comment { color: var(--muted); }
+    .code-block .cmd { color: var(--accent); }
+    .code-block .str { color: #e8c07d; }
+
+    .install-note {
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      font-size: 0.82rem;
+      color: var(--text);
+      font-family: var(--mono);
+    }
+
+    /* STATUS */
+    .status-grid {
+      display: grid;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .status-row:last-child { border-bottom: none; }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot.green { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+    .dot.red { background: #ff4444; }
+    .dot.yellow { background: #f0a000; }
+
+    .status-label { flex: 1; color: var(--text); }
+    .status-note { color: var(--muted); font-family: var(--mono); font-size: 0.78rem; }
+
+    /* COMMUNITY */
+    .community-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .community-link {
+      background: var(--bg);
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.2s;
+      display: block;
+    }
+
+    .community-link:hover { background: var(--surface); }
+
+    .community-link-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .community-link-value {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-family: var(--mono);
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero > * {
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .tag { animation-delay: 0.1s; }
+    h1 { animation-delay: 0.2s; }
+    .hero-sub { animation-delay: 0.3s; }
+    .hero-quote { animation-delay: 0.4s; }
+    .hero-actions { animation-delay: 0.5s; }
+
+    /* CURSOR BLINK */
+    .cursor::after {
+      content: '▋';
+      animation: blink 1s step-end infinite;
+      color: var(--accent);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/" class="logo">free<span>unit</span>.org</a>
+    <div class="links">
+      <a href="#install">Install</a>
+      <a href="#status">Status</a>
+      <a href="https://github.com/freeunitorg/freeunit">GitHub</a>
+      <a href="https://github.com/freeunitorg/freeunit" class="btn">Star ★</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="container">
+      <div class="tag">Community LTS Fork</div>
+      <h1>Free<em>Unit</em><span class="cursor"></span></h1>
+      <p class="hero-sub">
+        Unit application server, continued by the community.<br>
+        Free as in freedom.
+      </p>
+      <div class="hero-quote">
+        The original Unit repository was archived in October 2025.<br>
+        The maintainers noted: "A new maintainer is desired."<br>
+        <strong>FreeUnit is that maintainer.</strong>
+      </div>
+      <div class="hero-actions">
+        <a href="#install" class="btn">Get Started</a>
+        <a href="https://github.com/freeunitorg/freeunit" class="btn-outline">View on GitHub →</a>
+        <a href="mailto:team@freeunit.org" class="btn-outline">team@freeunit.org</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lineage">
+    <div class="container" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <span class="lineage-label">In the lineage of</span>
+      <div class="lineage-items">
+        <span class="lineage-item">freenginx</span>
+        <span class="lineage-item">MariaDB</span>
+        <span class="lineage-item">LibreOffice</span>
+        <span class="lineage-item">OpenSSH</span>
+      </div>
+      <span class="lineage-label" style="margin-left:auto;font-size:0.7rem;">— when corporations step back, community takes over</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <h2>Why FreeUnit</h2>
+      <div class="goals">
+        <div class="goal">
+          <div class="goal-num">01</div>
+          <div class="goal-title">PHP 8.4 + 8.5</div>
+          <div class="goal-desc">First-class support for modern PHP runtimes. The primary motivation for this fork.</div>
+        </div>
+        <div class="goal">
+          <div class="goal-num">02</div>
+          <div class="goal-title">Security Backports</div>
+          <div class="goal-desc">Active security maintenance. No more unaddressed CVEs in archived repositories.</div>
+        </div>
+        <div class="goal">
+          <div class="goal-num">03</div>
+          <div class="goal-title">Stable Release Cycle</div>
+          <div class="goal-desc">Predictable LTS releases. Production deployments need guarantees, not uncertainty.</div>
+        </div>
+        <div class="goal">
+          <div class="goal-num">04</div>
+          <div class="goal-title">Community Governed</div>
+          <div class="goal-desc">No corporate control. Decisions made by active contributors, not product managers.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="container">
+      <h2>Installation</h2>
+      <div class="code-block">
+        <span class="comment"># Build from source</span><br>
+        <span class="cmd">git clone</span> https://github.com/freeunitorg/freeunit<br>
+        <span class="cmd">cd</span> freeunit<br>
+        <span class="cmd">./configure</span> --openssl --otel<br>
+        <span class="cmd">make</span><br>
+        <span class="cmd">sudo make</span> unitd-install
+      </div>
+      <div class="install-note">
+        ⚠ Official packages and Docker images are coming soon.<br>
+        PHP 8.5 support requires the FreeUnit fork — not available in the archived upstream.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>OpenTelemetry</h2>
+      <div class="code-block">
+        <span class="comment"># Configure OTel via Unit JSON API</span><br>
+        {<br>
+        &nbsp;&nbsp;<span class="str">"settings"</span>: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"telemetry"</span>: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"endpoint"</span>: <span class="str">"http://localhost:4317/v1/traces"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"protocol"</span>: <span class="str">"grpc"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"sampling_ratio"</span>: 1.0,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"batch_size"</span>: 20<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;}<br>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="status">
+    <div class="container">
+      <h2>Project Status</h2>
+      <div class="status-grid">
+        <div class="status-row">
+          <div class="dot green"></div>
+          <div class="status-label">freeunit.org + freeunit.dev</div>
+          <div class="status-note">registered</div>
+        </div>
+        <div class="status-row">
+          <div class="dot green"></div>
+          <div class="status-label">GitHub org freeunitorg</div>
+          <div class="status-note">active</div>
+        </div>
+        <div class="status-row">
+          <div class="dot green"></div>
+          <div class="status-label">Unit 1.35.0 fork</div>
+          <div class="status-note">all branches</div>
+        </div>
+        <div class="status-row">
+          <div class="dot green"></div>
+          <div class="status-label">PHP 8.5 build</div>
+          <div class="status-note">working</div>
+        </div>
+        <div class="status-row">
+          <div class="dot yellow"></div>
+          <div class="status-label">Docker images</div>
+          <div class="status-note">in progress</div>
+        </div>
+        <div class="status-row">
+          <div class="dot yellow"></div>
+          <div class="status-label">CI/CD pipeline</div>
+          <div class="status-note">in progress</div>
+        </div>
+        <div class="status-row">
+          <div class="dot red"></div>
+          <div class="status-label">Official packages</div>
+          <div class="status-note">coming soon</div>
+        </div>
+        <div class="status-row">
+          <div class="dot red"></div>
+          <div class="status-label">F5 repo transfer</div>
+          <div class="status-note">in negotiation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Community</h2>
+      <div class="community-links">
+        <a href="https://github.com/freeunitorg/freeunit/discussions" class="community-link">
+          <div class="community-link-label">Discussions</div>
+          <div class="community-link-value">github.com/freeunitorg</div>
+        </a>
+        <a href="https://github.com/freeunitorg/freeunit/issues" class="community-link">
+          <div class="community-link-label">Issues</div>
+          <div class="community-link-value">Report a bug →</div>
+        </a>
+        <a href="mailto:team@freeunit.org" class="community-link">
+          <div class="community-link-label">Contact</div>
+          <div class="community-link-value">team@freeunit.org</div>
+        </a>
+        <a href="https://github.com/freeunitorg/freeunit/blob/master/CONTRIBUTING.md" class="community-link">
+          <div class="community-link-label">Contributing</div>
+          <div class="community-link-value">CONTRIBUTING.md →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <span>© 2026 FreeUnit Community — Apache 2.0</span>
+    <span>Forked from <a href="https://github.com/nginx/unit">nginx/unit</a> — original authors retain full credit</span>
+  </div>
+</footer>
+
+</body>
+</html>
