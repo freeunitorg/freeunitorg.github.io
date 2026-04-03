@@ -6,18 +6,19 @@
   <title>FreeUnit — Community LTS fork of Unit</title>
   <meta name="description" content="Unit application server, continued by the community. Free as in freedom.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
-      --border: #1e1e1e;
-      --text: #e8e8e8;
-      --muted: #555;
-      --accent: #00c896;
-      --accent-dim: #00c89620;
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --border: #e0ddd8;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+      --accent: #006644;
+      --accent-light: #e8f5f0;
+      --accent-hover: #005035;
       --mono: 'IBM Plex Mono', monospace;
       --sans: 'IBM Plex Sans', sans-serif;
     }
@@ -28,42 +29,24 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Grid overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: 0.3;
-      pointer-events: none;
-      z-index: 0;
     }
 
     .container {
       max-width: 860px;
       margin: 0 auto;
       padding: 0 2rem;
-      position: relative;
-      z-index: 1;
     }
 
     /* NAV */
     nav {
-      padding: 1.5rem 0;
+      padding: 1.25rem 0;
       border-bottom: 1px solid var(--border);
+      background: var(--surface);
       position: sticky;
       top: 0;
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
       z-index: 100;
     }
 
@@ -79,76 +62,59 @@
       font-size: 1rem;
       color: var(--accent);
       text-decoration: none;
-      letter-spacing: -0.02em;
     }
 
-    .logo span {
-      color: var(--muted);
-      font-weight: 400;
-    }
+    .logo span { color: var(--muted); font-weight: 400; }
+
+    nav .links { display: flex; gap: 2rem; align-items: center; }
 
     nav a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.85rem;
-      font-family: var(--mono);
-      transition: color 0.2s;
+      font-size: 0.875rem;
+      transition: color 0.15s;
     }
 
     nav a:hover { color: var(--text); }
 
-    nav .links { display: flex; gap: 2rem; align-items: center; }
-
     .btn {
       background: var(--accent);
-      color: #000;
-      padding: 0.4rem 1rem;
+      color: #fff;
+      padding: 0.45rem 1.1rem;
       font-family: var(--mono);
       font-size: 0.8rem;
       font-weight: 600;
       text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: opacity 0.2s;
       display: inline-block;
+      transition: background 0.15s;
     }
 
-    .btn:hover { opacity: 0.85; color: #000; }
+    .btn:hover { background: var(--accent-hover); color: #fff; }
 
     /* HERO */
     .hero {
-      padding: 8rem 0 6rem;
+      padding: 7rem 0 5rem;
       border-bottom: 1px solid var(--border);
+      background: var(--surface);
     }
 
     .tag {
       font-family: var(--mono);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--accent);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .tag::before {
-      content: '';
-      display: inline-block;
-      width: 20px;
-      height: 1px;
-      background: var(--accent);
+      margin-bottom: 1.75rem;
     }
 
     h1 {
       font-family: var(--mono);
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
       font-weight: 600;
-      line-height: 1.1;
+      line-height: 1.05;
       letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-      color: #fff;
+      margin-bottom: 1.25rem;
+      color: var(--text);
     }
 
     h1 em {
@@ -159,40 +125,39 @@
     .hero-sub {
       font-size: 1.1rem;
       color: var(--muted);
-      max-width: 540px;
-      margin-bottom: 2.5rem;
+      max-width: 520px;
+      margin-bottom: 2rem;
       font-weight: 300;
     }
 
     .hero-quote {
-      border-left: 2px solid var(--accent);
+      border-left: 3px solid var(--accent);
       padding: 1rem 1.5rem;
-      margin: 2.5rem 0;
-      background: var(--accent-dim);
-      font-family: var(--mono);
-      font-size: 0.85rem;
+      margin: 2rem 0 2.5rem;
+      background: var(--accent-light);
+      font-size: 0.9rem;
       color: var(--text);
       max-width: 580px;
     }
 
     .hero-quote strong {
       color: var(--accent);
+      font-weight: 600;
       display: block;
       margin-top: 0.5rem;
-      font-size: 0.8rem;
     }
 
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
 
     .btn-outline {
       border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 0.4rem 1rem;
+      color: var(--text);
+      padding: 0.45rem 1.1rem;
       font-family: var(--mono);
       font-size: 0.8rem;
       text-decoration: none;
-      transition: all 0.2s;
       display: inline-block;
+      transition: all 0.15s;
     }
 
     .btn-outline:hover {
@@ -202,8 +167,12 @@
 
     /* LINEAGE */
     .lineage {
-      padding: 3rem 0;
+      padding: 1.75rem 0;
       border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .lineage .container {
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -214,18 +183,13 @@
       font-family: var(--mono);
       font-size: 0.75rem;
       color: var(--muted);
-      letter-spacing: 0.05em;
     }
 
-    .lineage-items {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
+    .lineage-items { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
     .lineage-item {
       font-family: var(--mono);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text);
       padding: 0.2rem 0.6rem;
       border: 1px solid var(--border);
@@ -234,17 +198,20 @@
 
     /* SECTIONS */
     section {
-      padding: 5rem 0;
+      padding: 4.5rem 0;
       border-bottom: 1px solid var(--border);
     }
 
+    section:nth-child(even) { background: var(--surface); }
+    section:nth-child(odd) { background: var(--bg); }
+
     h2 {
       font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -260,14 +227,14 @@
     /* GOALS */
     .goals {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
     }
 
     .goal {
-      background: var(--bg);
+      background: var(--surface);
       padding: 1.75rem;
     }
 
@@ -275,14 +242,14 @@
       font-family: var(--mono);
       font-size: 0.7rem;
       color: var(--muted);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
     }
 
     .goal-title {
       font-weight: 600;
       font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-      color: #fff;
+      margin-bottom: 0.4rem;
+      color: var(--text);
     }
 
     .goal-desc {
@@ -291,47 +258,45 @@
       line-height: 1.6;
     }
 
-    /* INSTALL */
+    /* CODE */
     .code-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: #1e1e1e;
+      border: 1px solid #333;
       padding: 1.5rem;
       font-family: var(--mono);
       font-size: 0.82rem;
-      line-height: 1.8;
-      color: var(--text);
+      line-height: 1.9;
+      color: #d4d4d4;
       overflow-x: auto;
-      position: relative;
     }
 
-    .code-block .comment { color: var(--muted); }
-    .code-block .cmd { color: var(--accent); }
-    .code-block .str { color: #e8c07d; }
+    .code-block .comment { color: #6a9955; }
+    .code-block .cmd { color: #569cd6; }
+    .code-block .str { color: #ce9178; }
+    .code-block .key { color: #9cdcfe; }
 
     .install-note {
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
       padding: 1rem 1.25rem;
-      background: var(--accent-dim);
-      border: 1px solid var(--accent);
-      font-size: 0.82rem;
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      font-size: 0.85rem;
       color: var(--text);
-      font-family: var(--mono);
     }
 
     /* STATUS */
     .status-grid {
-      display: grid;
-      gap: 0;
       border: 1px solid var(--border);
+      background: var(--surface);
     }
 
     .status-row {
       display: flex;
       align-items: center;
-      padding: 0.9rem 1.25rem;
+      padding: 0.85rem 1.25rem;
       border-bottom: 1px solid var(--border);
       gap: 1rem;
-      font-size: 0.85rem;
+      font-size: 0.875rem;
     }
 
     .status-row:last-child { border-bottom: none; }
@@ -343,32 +308,36 @@
       flex-shrink: 0;
     }
 
-    .dot.green { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
-    .dot.red { background: #ff4444; }
-    .dot.yellow { background: #f0a000; }
+    .dot.green { background: #16a34a; }
+    .dot.yellow { background: #d97706; }
+    .dot.red { background: #dc2626; }
 
     .status-label { flex: 1; color: var(--text); }
-    .status-note { color: var(--muted); font-family: var(--mono); font-size: 0.78rem; }
+    .status-note {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
 
     /* COMMUNITY */
     .community-links {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
     }
 
     .community-link {
-      background: var(--bg);
+      background: var(--surface);
       padding: 1.5rem;
       text-decoration: none;
       color: var(--text);
-      transition: background 0.2s;
+      transition: background 0.15s;
       display: block;
     }
 
-    .community-link:hover { background: var(--surface); }
+    .community-link:hover { background: var(--accent-light); }
 
     .community-link-label {
       font-family: var(--mono);
@@ -376,18 +345,21 @@
       color: var(--muted);
       margin-bottom: 0.4rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
 
     .community-link-value {
       font-family: var(--mono);
       font-size: 0.85rem;
       color: var(--accent);
+      font-weight: 600;
     }
 
     /* FOOTER */
     footer {
-      padding: 3rem 0;
+      padding: 2.5rem 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: 0.8rem;
       font-family: var(--mono);
@@ -398,29 +370,13 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--text); }
+    footer a:hover { color: var(--accent); }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero > * {
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .tag { animation-delay: 0.1s; }
-    h1 { animation-delay: 0.2s; }
-    .hero-sub { animation-delay: 0.3s; }
-    .hero-quote { animation-delay: 0.4s; }
-    .hero-actions { animation-delay: 0.5s; }
-
-    /* CURSOR BLINK */
+    /* CURSOR */
     .cursor::after {
       content: '▋';
       animation: blink 1s step-end infinite;
@@ -430,6 +386,28 @@
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero > .container > * {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .tag { animation-delay: 0.05s; }
+    h1 { animation-delay: 0.15s; }
+    .hero-sub { animation-delay: 0.25s; }
+    .hero-quote { animation-delay: 0.35s; }
+    .hero-actions { animation-delay: 0.45s; }
+
+    @media (max-width: 640px) {
+      nav .links { gap: 1rem; }
+      nav a:not(.btn) { display: none; }
+      h1 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -442,183 +420,181 @@
       <a href="#install">Install</a>
       <a href="#status">Status</a>
       <a href="https://github.com/freeunitorg/freeunit">GitHub</a>
-      <a href="https://github.com/freeunitorg/freeunit" class="btn">Star ★</a>
+      <a href="https://github.com/freeunitorg/freeunit" class="btn">★ Star</a>
     </div>
   </div>
 </nav>
 
-<main>
-  <div class="hero">
-    <div class="container">
-      <div class="tag">Community LTS Fork</div>
-      <h1>Free<em>Unit</em><span class="cursor"></span></h1>
-      <p class="hero-sub">
-        Unit application server, continued by the community.<br>
-        Free as in freedom.
-      </p>
-      <div class="hero-quote">
-        The original Unit repository was archived in October 2025.<br>
-        The maintainers noted: "A new maintainer is desired."<br>
-        <strong>FreeUnit is that maintainer.</strong>
+<div class="hero">
+  <div class="container">
+    <div class="tag">Community LTS Fork · April 2026</div>
+    <h1>Free<em>Unit</em><span class="cursor"></span></h1>
+    <p class="hero-sub">
+      Unit application server, continued by the community.<br>
+      Free as in freedom.
+    </p>
+    <div class="hero-quote">
+      The original Unit repository was archived in October 2025.<br>
+      The maintainers noted: <em>"A new maintainer is desired."</em>
+      <strong>FreeUnit is that maintainer.</strong>
+    </div>
+    <div class="hero-actions">
+      <a href="#install" class="btn">Get Started →</a>
+      <a href="https://github.com/freeunitorg/freeunit" class="btn-outline">View on GitHub</a>
+      <a href="mailto:team@freeunit.org" class="btn-outline">team@freeunit.org</a>
+    </div>
+  </div>
+</div>
+
+<div class="lineage">
+  <div class="container">
+    <span class="lineage-label">In the lineage of</span>
+    <div class="lineage-items">
+      <span class="lineage-item">freenginx</span>
+      <span class="lineage-item">MariaDB</span>
+      <span class="lineage-item">LibreOffice</span>
+      <span class="lineage-item">OpenSSH</span>
+    </div>
+    <span class="lineage-label">— when corporations step back, community takes over</span>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <h2>Why FreeUnit</h2>
+    <div class="goals">
+      <div class="goal">
+        <div class="goal-num">01</div>
+        <div class="goal-title">PHP 8.4 + 8.5</div>
+        <div class="goal-desc">First-class support for modern PHP runtimes. The primary motivation for this fork.</div>
       </div>
-      <div class="hero-actions">
-        <a href="#install" class="btn">Get Started</a>
-        <a href="https://github.com/freeunitorg/freeunit" class="btn-outline">View on GitHub →</a>
-        <a href="mailto:team@freeunit.org" class="btn-outline">team@freeunit.org</a>
+      <div class="goal">
+        <div class="goal-num">02</div>
+        <div class="goal-title">Security Backports</div>
+        <div class="goal-desc">Active security maintenance. No more unaddressed CVEs in archived repositories.</div>
+      </div>
+      <div class="goal">
+        <div class="goal-num">03</div>
+        <div class="goal-title">Stable Releases</div>
+        <div class="goal-desc">Predictable LTS release cycle. Production deployments need guarantees.</div>
+      </div>
+      <div class="goal">
+        <div class="goal-num">04</div>
+        <div class="goal-title">Community Governed</div>
+        <div class="goal-desc">No corporate control. Decisions made by active contributors.</div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="lineage">
-    <div class="container" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-      <span class="lineage-label">In the lineage of</span>
-      <div class="lineage-items">
-        <span class="lineage-item">freenginx</span>
-        <span class="lineage-item">MariaDB</span>
-        <span class="lineage-item">LibreOffice</span>
-        <span class="lineage-item">OpenSSH</span>
-      </div>
-      <span class="lineage-label" style="margin-left:auto;font-size:0.7rem;">— when corporations step back, community takes over</span>
+<section id="install">
+  <div class="container">
+    <h2>Installation</h2>
+    <div class="code-block">
+      <span class="comment"># Build from source</span><br>
+      <span class="cmd">git clone</span> https://github.com/freeunitorg/freeunit<br>
+      <span class="cmd">cd</span> freeunit<br>
+      <span class="cmd">./configure</span> --openssl --otel<br>
+      <span class="cmd">make</span><br>
+      <span class="cmd">sudo make</span> unitd-install
+    </div>
+    <div class="install-note">
+      Official packages and Docker images are coming soon.<br>
+      PHP 8.5 support requires FreeUnit — not available in the archived upstream.
     </div>
   </div>
+</section>
 
-  <section>
-    <div class="container">
-      <h2>Why FreeUnit</h2>
-      <div class="goals">
-        <div class="goal">
-          <div class="goal-num">01</div>
-          <div class="goal-title">PHP 8.4 + 8.5</div>
-          <div class="goal-desc">First-class support for modern PHP runtimes. The primary motivation for this fork.</div>
-        </div>
-        <div class="goal">
-          <div class="goal-num">02</div>
-          <div class="goal-title">Security Backports</div>
-          <div class="goal-desc">Active security maintenance. No more unaddressed CVEs in archived repositories.</div>
-        </div>
-        <div class="goal">
-          <div class="goal-num">03</div>
-          <div class="goal-title">Stable Release Cycle</div>
-          <div class="goal-desc">Predictable LTS releases. Production deployments need guarantees, not uncertainty.</div>
-        </div>
-        <div class="goal">
-          <div class="goal-num">04</div>
-          <div class="goal-title">Community Governed</div>
-          <div class="goal-desc">No corporate control. Decisions made by active contributors, not product managers.</div>
-        </div>
+<section>
+  <div class="container">
+    <h2>OpenTelemetry</h2>
+    <div class="code-block">
+      <span class="comment"># Configure via Unit JSON API</span><br>
+      {<br>
+      &nbsp;&nbsp;<span class="key">"settings"</span>: {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"telemetry"</span>: {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"endpoint"</span>: <span class="str">"http://localhost:4317/v1/traces"</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"protocol"</span>: <span class="str">"grpc"</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"sampling_ratio"</span>: 1.0,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"batch_size"</span>: 20<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="container">
+    <h2>Project Status</h2>
+    <div class="status-grid">
+      <div class="status-row">
+        <div class="dot green"></div>
+        <div class="status-label">freeunit.org + freeunit.dev registered</div>
+        <div class="status-note">April 2026</div>
+      </div>
+      <div class="status-row">
+        <div class="dot green"></div>
+        <div class="status-label">GitHub org freeunitorg created</div>
+        <div class="status-note">5 repos</div>
+      </div>
+      <div class="status-row">
+        <div class="dot green"></div>
+        <div class="status-label">Unit 1.35.0 fork — all branches</div>
+        <div class="status-note">active</div>
+      </div>
+      <div class="status-row">
+        <div class="dot green"></div>
+        <div class="status-label">PHP 8.5 working build</div>
+        <div class="status-note">Unit 1.35.0</div>
+      </div>
+      <div class="status-row">
+        <div class="dot yellow"></div>
+        <div class="status-label">Docker images</div>
+        <div class="status-note">in progress</div>
+      </div>
+      <div class="status-row">
+        <div class="dot yellow"></div>
+        <div class="status-label">CI/CD pipeline</div>
+        <div class="status-note">in progress</div>
+      </div>
+      <div class="status-row">
+        <div class="dot red"></div>
+        <div class="status-label">Official packages</div>
+        <div class="status-note">coming soon</div>
+      </div>
+      <div class="status-row">
+        <div class="dot red"></div>
+        <div class="status-label">F5 repository transfer</div>
+        <div class="status-note">in negotiation</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="install">
-    <div class="container">
-      <h2>Installation</h2>
-      <div class="code-block">
-        <span class="comment"># Build from source</span><br>
-        <span class="cmd">git clone</span> https://github.com/freeunitorg/freeunit<br>
-        <span class="cmd">cd</span> freeunit<br>
-        <span class="cmd">./configure</span> --openssl --otel<br>
-        <span class="cmd">make</span><br>
-        <span class="cmd">sudo make</span> unitd-install
-      </div>
-      <div class="install-note">
-        ⚠ Official packages and Docker images are coming soon.<br>
-        PHP 8.5 support requires the FreeUnit fork — not available in the archived upstream.
-      </div>
+<section>
+  <div class="container">
+    <h2>Community</h2>
+    <div class="community-links">
+      <a href="https://github.com/freeunitorg/freeunit/discussions" class="community-link">
+        <div class="community-link-label">Discussions</div>
+        <div class="community-link-value">GitHub →</div>
+      </a>
+      <a href="https://github.com/freeunitorg/freeunit/issues" class="community-link">
+        <div class="community-link-label">Issues</div>
+        <div class="community-link-value">Report a bug →</div>
+      </a>
+      <a href="mailto:team@freeunit.org" class="community-link">
+        <div class="community-link-label">Contact</div>
+        <div class="community-link-value">team@freeunit.org</div>
+      </a>
+      <a href="https://github.com/freeunitorg/freeunit/blob/master/CONTRIBUTING.md" class="community-link">
+        <div class="community-link-label">Contributing</div>
+        <div class="community-link-value">CONTRIBUTING.md →</div>
+      </a>
     </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2>OpenTelemetry</h2>
-      <div class="code-block">
-        <span class="comment"># Configure OTel via Unit JSON API</span><br>
-        {<br>
-        &nbsp;&nbsp;<span class="str">"settings"</span>: {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"telemetry"</span>: {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"endpoint"</span>: <span class="str">"http://localhost:4317/v1/traces"</span>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"protocol"</span>: <span class="str">"grpc"</span>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"sampling_ratio"</span>: 1.0,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"batch_size"</span>: 20<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-        &nbsp;&nbsp;}<br>
-        }
-      </div>
-    </div>
-  </section>
-
-  <section id="status">
-    <div class="container">
-      <h2>Project Status</h2>
-      <div class="status-grid">
-        <div class="status-row">
-          <div class="dot green"></div>
-          <div class="status-label">freeunit.org + freeunit.dev</div>
-          <div class="status-note">registered</div>
-        </div>
-        <div class="status-row">
-          <div class="dot green"></div>
-          <div class="status-label">GitHub org freeunitorg</div>
-          <div class="status-note">active</div>
-        </div>
-        <div class="status-row">
-          <div class="dot green"></div>
-          <div class="status-label">Unit 1.35.0 fork</div>
-          <div class="status-note">all branches</div>
-        </div>
-        <div class="status-row">
-          <div class="dot green"></div>
-          <div class="status-label">PHP 8.5 build</div>
-          <div class="status-note">working</div>
-        </div>
-        <div class="status-row">
-          <div class="dot yellow"></div>
-          <div class="status-label">Docker images</div>
-          <div class="status-note">in progress</div>
-        </div>
-        <div class="status-row">
-          <div class="dot yellow"></div>
-          <div class="status-label">CI/CD pipeline</div>
-          <div class="status-note">in progress</div>
-        </div>
-        <div class="status-row">
-          <div class="dot red"></div>
-          <div class="status-label">Official packages</div>
-          <div class="status-note">coming soon</div>
-        </div>
-        <div class="status-row">
-          <div class="dot red"></div>
-          <div class="status-label">F5 repo transfer</div>
-          <div class="status-note">in negotiation</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2>Community</h2>
-      <div class="community-links">
-        <a href="https://github.com/freeunitorg/freeunit/discussions" class="community-link">
-          <div class="community-link-label">Discussions</div>
-          <div class="community-link-value">github.com/freeunitorg</div>
-        </a>
-        <a href="https://github.com/freeunitorg/freeunit/issues" class="community-link">
-          <div class="community-link-label">Issues</div>
-          <div class="community-link-value">Report a bug →</div>
-        </a>
-        <a href="mailto:team@freeunit.org" class="community-link">
-          <div class="community-link-label">Contact</div>
-          <div class="community-link-value">team@freeunit.org</div>
-        </a>
-        <a href="https://github.com/freeunitorg/freeunit/blob/master/CONTRIBUTING.md" class="community-link">
-          <div class="community-link-label">Contributing</div>
-          <div class="community-link-value">CONTRIBUTING.md →</div>
-        </a>
-      </div>
-    </div>
-  </section>
-</main>
+  </div>
+</section>
 
 <footer>
   <div class="container">
