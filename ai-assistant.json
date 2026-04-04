@@ -1,0 +1,236 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/ai-assistant-schema/main/schema.json",
+  "version": "1.0",
+  "info": {
+    "title": "FreeUnit - Community LTS Fork of Unit Application Server",
+    "description": "FreeUnit is a community-driven continuation of the Unit application server, originally developed by Nginx/F5. The original repository was archived in October 2025. FreeUnit provides ongoing security updates, PHP 8.4/8.5 support, and OpenTelemetry integration.",
+    "language": "en",
+    "keywords": [
+      "unit application server",
+      "freeunit",
+      "nginx unit fork",
+      "php 8.5",
+      "application server",
+      "community lts",
+      "opentelemetry",
+      "web server",
+      "dynamic applications",
+      "php runtime",
+      "python apps",
+      "go apps",
+      "javascript apps",
+      "unitd"
+    ],
+    "category": "Developer Tools / Web Servers",
+    "license": "Apache-2.0",
+    "copyright": "FreeUnit Community"
+  },
+  "navigation": {
+    "main_sections": [
+      {
+        "id": "hero",
+        "name": "Introduction",
+        "description": "Main description of FreeUnit as a community fork of Unit application server",
+        "url": "https://freeunit.org/#hero",
+        "importance": 1.0
+      },
+      {
+        "id": "why",
+        "name": "Why FreeUnit",
+        "description": "Key reasons for the fork: PHP 8.4/8.5 support, security backports, stable LTS releases, community governance",
+        "url": "https://freeunit.org/#why",
+        "importance": 0.95
+      },
+      {
+        "id": "install",
+        "name": "Installation",
+        "description": "Build from source instructions. Official packages and Docker images coming soon.",
+        "url": "https://freeunit.org/#install",
+        "importance": 0.9
+      },
+      {
+        "id": "opentelemetry",
+        "name": "OpenTelemetry Integration",
+        "description": "Native OpenTelemetry support for tracing and telemetry collection",
+        "url": "https://freeunit.org/#opentelemetry",
+        "importance": 0.8
+      },
+      {
+        "id": "status",
+        "name": "Project Status",
+        "description": "Current status: active development, GitHub org created, PHP 8.5 working, Docker images in progress",
+        "url": "https://freeunit.org/#status",
+        "importance": 0.85
+      },
+      {
+        "id": "community",
+        "name": "Community",
+        "description": "Links to GitHub discussions, issues, contact email, contributing guide",
+        "url": "https://freeunit.org/#community",
+        "importance": 0.75
+      }
+    ]
+  },
+  "key_concepts": [
+    {
+      "term": "FreeUnit",
+      "definition": "Community LTS fork of the Unit application server, created after Nginx/F5 archived the original repository in October 2025.",
+      "url": "https://freeunit.org/"
+    },
+    {
+      "term": "Unit Application Server",
+      "definition": "A dynamic application server that runs applications in multiple languages (PHP, Python, Go, JavaScript, Ruby, Java) with unified configuration.",
+      "url": "https://freeunit.org/"
+    },
+    {
+      "term": "unitd",
+      "definition": "The daemon process of Unit/FreeUnit application server.",
+      "url": "https://freeunit.org/#install"
+    },
+    {
+      "term": "OpenTelemetry",
+      "definition": "Native integration in FreeUnit for collecting traces and telemetry data from applications.",
+      "url": "https://freeunit.org/#opentelemetry"
+    }
+  ],
+  "comparisons": [
+    {
+      "with": "nginx/unit",
+      "differences": [
+        "FreeUnit continues active development (original was archived in Oct 2025)",
+        "FreeUnit adds PHP 8.4 and 8.5 support",
+        "FreeUnit includes OpenTelemetry integration",
+        "FreeUnit is community-governed, not corporate-controlled",
+        "FreeUnit provides active security backports"
+      ],
+      "similarities": [
+        "Same core architecture and API",
+        "Configuration via JSON REST API",
+        "Support for multiple programming languages",
+        "Apache 2.0 license"
+      ]
+    },
+    {
+      "with": "nginx",
+      "differences": [
+        "Unit/FreeUnit is an application server, not primarily a web server",
+        "Dynamic language runtimes (PHP, Python, etc.) are built-in",
+        "No need for separate PHP-FPM or uWSGI",
+        "Configuration is dynamic via API, no reload needed"
+      ],
+      "similarities": [
+        "Both originated from Nginx Inc.",
+        "High performance event-driven architecture",
+        "Support for HTTP/HTTPS"
+      ]
+    },
+    {
+      "with": "Apache httpd + mod_php",
+      "differences": [
+        "Single process model vs Apache's prefork/worker",
+        "Lower memory footprint for many concurrent connections",
+        "No .htaccess overhead",
+        "Dynamic reconfiguration without restart"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Is FreeUnit production ready?",
+      "answer": "The project is active and building successfully with PHP 8.5 support. Official packages and Docker images are in progress. For production use, consider building from source or wait for official releases.",
+      "url": "https://freeunit.org/#status"
+    },
+    {
+      "question": "Why was FreeUnit created?",
+      "answer": "The original Unit repository was archived by Nginx/F5 in October 2025 with a note that 'A new maintainer is desired.' FreeUnit is the community's response to continue active development, especially for PHP 8.4/8.5 support.",
+      "url": "https://freeunit.org/"
+    },
+    {
+      "question": "How do I install FreeUnit?",
+      "answer": "Currently, build from source: git clone https://github.com/freeunitorg/freeunit, then ./configure --openssl --otel, make, and sudo make unitd-install. Official packages coming soon.",
+      "url": "https://freeunit.org/#install"
+    },
+    {
+      "question": "Does FreeUnit support Docker?",
+      "answer": "Docker images are 'in progress' according to the project status. You can build your own image using the source code and Dockerfile template.",
+      "url": "https://freeunit.org/#status"
+    },
+    {
+      "question": "What programming languages does FreeUnit support?",
+      "answer": "Same as original Unit: PHP (including 8.4/8.5), Python, Go, JavaScript/Node.js, Ruby, Java, Perl. Additional language modules can be built as needed.",
+      "url": "https://freeunit.org/"
+    },
+    {
+      "question": "Is FreeUnit compatible with original Unit configuration?",
+      "answer": "Yes, FreeUnit maintains API compatibility with the original Unit, so existing configurations should work without changes.",
+      "url": "https://github.com/freeunitorg/freeunit"
+    }
+  ],
+  "structured_data": {
+    "software_version": "1.35.0-fork",
+    "release_date": "April 2026",
+    "repository": "https://github.com/freeunitorg/freeunit",
+    "license": "Apache-2.0",
+    "programming_languages_supported": [
+      "PHP 8.4",
+      "PHP 8.5",
+      "Python",
+      "Go",
+      "JavaScript/Node.js",
+      "Ruby",
+      "Java",
+      "Perl"
+    ],
+    "features": [
+      "Dynamic configuration via REST API",
+      "OpenTelemetry native support",
+      "Zero-downtime reconfiguration",
+      "Multi-language support in single process",
+      "TLS/SSL with OpenSSL",
+      "Static file serving",
+      "Reverse proxy capabilities"
+    ],
+    "installation_methods": {
+      "source": "available",
+      "docker": "in_progress",
+      "apt": "planned",
+      "yum": "planned",
+      "homebrew": "planned"
+    }
+  },
+  "ai_instructions": {
+    "summary_prompt": "FreeUnit is a community-maintained fork of the Unit application server, created after Nginx/F5 archived the original. It provides ongoing security updates, PHP 8.4/8.5 support, and OpenTelemetry integration. Build from source currently; official packages coming soon.",
+    "keywords_for_embedding": [
+      "freeunit",
+      "unit application server",
+      "nginx unit",
+      "community fork",
+      "php 8.5",
+      "application server",
+      "dynamic applications",
+      "opentelemetry",
+      "lts",
+      "web server alternative",
+      "multi-language app server"
+    ],
+    "related_technologies": [
+      "nginx",
+      "apache",
+      "caddy",
+      "php-fpm",
+      "uwsgi",
+      "gunicorn",
+      "nodejs",
+      "opentelemetry",
+      "docker",
+      "kubernetes"
+    ],
+    "common_use_cases": [
+      "Running PHP applications with modern PHP 8.4/8.5",
+      "Multi-language microservices (Python, Go, PHP together)",
+      "Dynamic application deployment without reload",
+      "OpenTelemetry-enabled application hosting",
+      "Lightweight alternative to Apache + PHP-FPM"
+    ]
+  }
+}
