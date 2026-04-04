@@ -1,0 +1,14 @@
+# robots.txt for freeunit.org
+User-agent: *
+Allow: /
+Sitemap: https://freeunit.org/sitemap.xml
+
+# Specific AI crawlers (optional)
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
