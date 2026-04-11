@@ -68,6 +68,20 @@
         "description": "Links to GitHub discussions, issues, contact email, contributing guide",
         "url": "https://freeunit.org/#community",
         "importance": 0.75
+      },
+      {
+        "id": "docs",
+        "name": "Documentation",
+        "description": "Full documentation site for FreeUnit — installation, configuration, API reference",
+        "url": "https://docs.freeunit.org/",
+        "importance": 0.95
+      },
+      {
+        "id": "telegram",
+        "name": "Telegram Community",
+        "description": "Official FreeUnit Telegram group for community chat and announcements",
+        "url": "https://t.me/freeunitorg",
+        "importance": 0.7
       }
     ]
   },
