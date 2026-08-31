@@ -166,7 +166,7 @@
     },
     {
       "question": "Does FreeUnit support Docker?",
-      "answer": "Yes, Docker images are available for FreeUnit 1.35.4. See GitHub releases.",
+      "answer": "Yes, Docker images are available for FreeUnit 1.36.1. See GitHub releases.",
       "url": "https://freeunit.org/#status"
     },
     {
@@ -181,8 +181,8 @@
     }
   ],
   "structured_data": {
-    "software_version": "1.35.4",
-    "release_date": "April 2026",
+    "software_version": "1.36.1",
+    "release_date": "August 2026",
     "repository": "https://github.com/freeunitorg/freeunit",
     "license": "Apache-2.0",
     "programming_languages_supported": [
