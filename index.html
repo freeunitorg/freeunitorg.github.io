@@ -467,6 +467,9 @@
       line-height: 1.5;
     }
 
+    .news-item-desc a { color: var(--muted); }
+    .news-item-desc a:hover { color: var(--accent); }
+
     .news-rss {
       margin-top: 1.5rem;
       font-family: var(--mono);
@@ -687,12 +690,12 @@
       <div class="status-row">
         <div class="dot green"></div>
         <div class="status-label">PHP 8.5 working build</div>
-        <div class="status-note">1.37.0</div>
+        <div class="status-note">1.37.2</div>
       </div>
       <div class="status-row">
         <div class="dot green"></div>
         <div class="status-label">Docker images</div>
-        <div class="status-note">1.37.0</div>
+        <div class="status-note">1.37.2</div>
       </div>
       <div class="status-row">
         <div class="dot green"></div>
@@ -702,7 +705,7 @@
       <div class="status-row">
         <div class="dot green"></div>
         <div class="status-label">unitctl binaries</div>
-        <div class="status-note">1.37.0</div>
+        <div class="status-note">1.37.2</div>
       </div>
       <div class="status-row">
         <div class="dot red"></div>
@@ -747,7 +750,6 @@
         <tr><td>Java (JSC)</td><td>25 (LTS)</td><td>Sep 2031</td><td>Sep 2032</td></tr>
         <tr><td>Java (JSC)</td><td>26 †</td><td>Sep 2026</td><td>Sep 2027</td></tr>
         <tr><td>Java (JSC)</td><td>27</td><td>Mar 2027</td><td>Mar 2028</td></tr>
-        <tr><td>Node.js</td><td>20 (LTS) †</td><td>Apr 2026</td><td>Apr 2027</td></tr>
         <tr><td>Node.js</td><td>22 (LTS)</td><td>Apr 2027</td><td>Apr 2028</td></tr>
         <tr><td>Node.js</td><td>24 (LTS)</td><td>Apr 2028</td><td>Apr 2029</td></tr>
         <tr><td>Node.js</td><td>26 (LTS)</td><td>Apr 2029</td><td>Apr 2030</td></tr>
@@ -761,6 +763,7 @@
         <tr><td>Python</td><td>3.12</td><td>Oct 2028</td><td>Oct 2029</td></tr>
         <tr><td>Python</td><td>3.13</td><td>Oct 2029</td><td>Oct 2030</td></tr>
         <tr><td>Python</td><td>3.14</td><td>Oct 2030</td><td>Oct 2031</td></tr>
+        <tr><td>Python</td><td>3.15</td><td>Oct 2031</td><td>Oct 2032</td></tr>
         <tr><td>Ruby</td><td>3.3</td><td>Mar 2027</td><td>Mar 2028</td></tr>
         <tr><td>Ruby</td><td>3.4</td><td>Mar 2028</td><td>Mar 2029</td></tr>
         <tr><td>Ruby</td><td>4.0</td><td>Mar 2029</td><td>Mar 2030</td></tr>
@@ -814,19 +817,19 @@
     <h2>📰 Latest News</h2>
     <div class="news-list">
       <div class="news-item">
+        <div class="news-item-date">09 Nov 2026</div>
+        <a class="news-item-title" href="https://docs.freeunit.org/news/2026/unit-1.37.2-released">FreeUnit 1.37.2 Released</a>
+        <div class="news-item-desc">Three security advisories, upgrade recommended: <a href="https://github.com/freeunitorg/freeunit/security/advisories/GHSA-2j86-h6qw-489m">GHSA-2j86-h6qw-489m</a>, <a href="https://github.com/freeunitorg/freeunit/security/advisories/GHSA-mcrf-v94r-p6fc">GHSA-mcrf-v94r-p6fc</a> and <a href="https://github.com/freeunitorg/freeunit/security/advisories/GHSA-6p47-x23p-r5wm">GHSA-6p47-x23p-r5wm</a>. Wasmtime 48.0.8 and njs 1.0.2; compression of responses of unknown length; fixes for the shared application queue, WebSocket close handling and router crashes; stricter HTTP/1.1 parsing; the PHP module builds with PHP 8.7; Docker images for Python 3.15.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-item-date">30 Oct 2026</div>
+        <a class="news-item-title" href="https://docs.freeunit.org/news/2026/unit-1.37.1-released">FreeUnit 1.37.1 Released</a>
+        <div class="news-item-desc">Optional PCRE2 regex JIT and USDT tracing probes; HTTP, compression and application queue fixes; Wasmtime 48.0.7; PHP image hardening and release checks. Both new build options are off by default.</div>
+      </div>
+      <div class="news-item">
         <div class="news-item-date">04 Oct 2026</div>
         <a class="news-item-title" href="https://docs.freeunit.org/news/2026/unit-1.37.0-released">Unit 1.37.0 Released</a>
         <div class="news-item-desc">Byte-range and conditional requests for static files; certificate replacement without a restart; hardening of the messages between Unit's processes; Accept-Encoding negotiation fixes; a --hardening configure option. Five security advisories.</div>
-      </div>
-      <div class="news-item">
-        <div class="news-item-date">28 Aug 2026</div>
-        <a class="news-item-title" href="https://docs.freeunit.org/news/2026/unit-1.36.1-released">Unit 1.36.1 Released</a>
-        <div class="news-item-desc">Peer-message hardening across the port protocol; chunked trailers and response-length correctness; OpenTelemetry export health in /status and a leaner traced request path; session tickets fixed on no-deprecated builds; OpenSSL 1.1.1 floor and 4.0 support.</div>
-      </div>
-      <div class="news-item">
-        <div class="news-item-date">16 Jul 2026</div>
-        <a class="news-item-title" href="https://docs.freeunit.org/news/2026/unit-1.36.0-released">Unit 1.36.0 Released</a>
-        <div class="news-item-desc">Security and correctness hardening — config NUL/empty rejection, rootfs mount TOCTOU, proxy response-smuggling, libunit/Java bounds; SIGQUIT graceful stop; wasmtime 36. Two advisories: GHSA-768w-qrh2-jjvh and GHSA-g6v8-r577-76jm.</div>
       </div>
     </div>
     <p class="news-rss"><a href="https://docs.freeunit.org/rss.xml">RSS feed →</a></p>
