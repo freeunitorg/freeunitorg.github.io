@@ -690,12 +690,12 @@
       <div class="status-row">
         <div class="dot green"></div>
         <div class="status-label">PHP 8.5 working build</div>
-        <div class="status-note">1.37.2</div>
+        <div class="status-note">1.37.3</div>
       </div>
       <div class="status-row">
         <div class="dot green"></div>
         <div class="status-label">Docker images</div>
-        <div class="status-note">1.37.2</div>
+        <div class="status-note">1.37.3</div>
       </div>
       <div class="status-row">
         <div class="dot green"></div>
@@ -705,7 +705,7 @@
       <div class="status-row">
         <div class="dot green"></div>
         <div class="status-label">unitctl binaries</div>
-        <div class="status-note">1.37.2</div>
+        <div class="status-note">1.37.3</div>
       </div>
       <div class="status-row">
         <div class="dot red"></div>
@@ -760,6 +760,7 @@
         <tr><td>PHP</td><td>8.3</td><td>Dec 2027</td><td>Dec 2028</td></tr>
         <tr><td>PHP</td><td>8.4</td><td>Dec 2028</td><td>Dec 2029</td></tr>
         <tr><td>PHP</td><td>8.5</td><td>Dec 2029</td><td>Dec 2030</td></tr>
+        <tr><td>PHP</td><td>8.6</td><td>Dec 2030</td><td>Dec 2031</td></tr>
         <tr><td>Python</td><td>3.12</td><td>Oct 2028</td><td>Oct 2029</td></tr>
         <tr><td>Python</td><td>3.13</td><td>Oct 2029</td><td>Oct 2030</td></tr>
         <tr><td>Python</td><td>3.14</td><td>Oct 2030</td><td>Oct 2031</td></tr>
@@ -787,6 +788,7 @@
         <tr><td>Fedora</td><td>42 †</td><td>2026-05</td><td>2029-05</td></tr>
         <tr><td>Fedora</td><td>43</td><td>2026-12</td><td>2029-12</td></tr>
         <tr><td>Fedora</td><td>44</td><td>2027-06</td><td>2030-06</td></tr>
+        <tr><td>Fedora</td><td>45</td><td>2027-12</td><td>2030-12</td></tr>
         <tr><td>CentOS Stream</td><td>9</td><td>2027-05</td><td>2030-05</td></tr>
         <tr><td>CentOS Stream</td><td>10</td><td>2030-05</td><td>2033-05</td></tr>
         <tr><td>Amazon Linux</td><td>2 †</td><td>2026-06</td><td>2029-06</td></tr>
@@ -817,6 +819,11 @@
     <h2>📰 Latest News</h2>
     <div class="news-list">
       <div class="news-item">
+        <div class="news-item-date">27 Nov 2026</div>
+        <a class="news-item-title" href="https://docs.freeunit.org/news/2026/unit-1.37.3-released">FreeUnit 1.37.3 Released</a>
+        <div class="news-item-desc">Security fixes, upgrade recommended: <a href="https://github.com/freeunitorg/freeunit/security/advisories/GHSA-h635-72hj-3wfw">GHSA-h635-72hj-3wfw</a> (Java module request path), <a href="https://github.com/freeunitorg/freeunit/security/advisories/GHSA-hm9m-3c5h-jqp7">GHSA-hm9m-3c5h-jqp7</a> (router: WebSocket, timer and proxy buffers) and <a href="https://github.com/freeunitorg/freeunit/security/advisories/GHSA-p2mm-qm5c-m9w7">GHSA-p2mm-qm5c-m9w7</a> (route rule bypass with "rewrite" and "pass"). Docker images for PHP 8.6 (NTS "php-8.6", ZTS "php-8.6-zts"); Wasmtime 48.0.10; the Homebrew tap freeunitorg/homebrew-unit.</div>
+      </div>
+      <div class="news-item">
         <div class="news-item-date">09 Nov 2026</div>
         <a class="news-item-title" href="https://docs.freeunit.org/news/2026/unit-1.37.2-released">FreeUnit 1.37.2 Released</a>
         <div class="news-item-desc">Three security advisories, upgrade recommended: <a href="https://github.com/freeunitorg/freeunit/security/advisories/GHSA-2j86-h6qw-489m">GHSA-2j86-h6qw-489m</a>, <a href="https://github.com/freeunitorg/freeunit/security/advisories/GHSA-mcrf-v94r-p6fc">GHSA-mcrf-v94r-p6fc</a> and <a href="https://github.com/freeunitorg/freeunit/security/advisories/GHSA-6p47-x23p-r5wm">GHSA-6p47-x23p-r5wm</a>. Wasmtime 48.0.8 and njs 1.0.2; compression of responses of unknown length; fixes for the shared application queue, WebSocket close handling and router crashes; stricter HTTP/1.1 parsing; the PHP module builds with PHP 8.7; Docker images for Python 3.15.</div>
@@ -825,11 +832,6 @@
         <div class="news-item-date">30 Oct 2026</div>
         <a class="news-item-title" href="https://docs.freeunit.org/news/2026/unit-1.37.1-released">FreeUnit 1.37.1 Released</a>
         <div class="news-item-desc">Optional PCRE2 regex JIT and USDT tracing probes; HTTP, compression and application queue fixes; Wasmtime 48.0.7; PHP image hardening and release checks. Both new build options are off by default.</div>
-      </div>
-      <div class="news-item">
-        <div class="news-item-date">04 Oct 2026</div>
-        <a class="news-item-title" href="https://docs.freeunit.org/news/2026/unit-1.37.0-released">Unit 1.37.0 Released</a>
-        <div class="news-item-desc">Byte-range and conditional requests for static files; certificate replacement without a restart; hardening of the messages between Unit's processes; Accept-Encoding negotiation fixes; a --hardening configure option. Five security advisories.</div>
       </div>
     </div>
     <p class="news-rss"><a href="https://docs.freeunit.org/rss.xml">RSS feed →</a></p>
